@@ -1,0 +1,45 @@
+USE CIS552_PROJECT;
+
+CREATE TABLE IF NOT EXISTS Person (
+  PersonID INT PRIMARY KEY,
+  PersonName VARCHAR(255),
+  BirthDate VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS School (
+  SchoolID VARCHAR(50) PRIMARY KEY,
+  SchoolName VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Campus (
+  CampusID INT AUTO_INCREMENT PRIMARY KEY,
+  SchoolID VARCHAR(50),
+  CampusName VARCHAR(255),
+  FOREIGN KEY (SchoolID) REFERENCES School(SchoolID)
+);
+
+CREATE TABLE IF NOT EXISTS Department (
+  DepartmentID VARCHAR(50) PRIMARY KEY,
+  DepartmentName VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Job (
+  JobID VARCHAR(50) PRIMARY KEY,
+  JobTitle VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Employment (
+  EmploymentID INT AUTO_INCREMENT PRIMARY KEY,
+  PersonID INT,
+  JobID VARCHAR(50),
+  SchoolID VARCHAR(50),
+  SchoolCampus VARCHAR(255),
+  DepartmentID VARCHAR(50),
+  StillWorking VARCHAR(10),
+  Earnings DOUBLE,
+  EarningsYear INT,
+  FOREIGN KEY (PersonID) REFERENCES Person(PersonID),
+  FOREIGN KEY (JobID) REFERENCES Job(JobID),
+  FOREIGN KEY (SchoolID) REFERENCES School(SchoolID),
+  FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
